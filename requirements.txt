@@ -1,0 +1,28 @@
+# AI Attendance System - backend dependencies
+# ---------------------------------------------------------------------------
+# Python 3.11+ required (verified on CPython 3.13, Windows x64).
+#
+# NOTE: InsightFace 2.0 is published as a *pure-Python* wheel, so installing the
+# face pipeline no longer requires a C++ compiler / Visual Studio Build Tools.
+# The pretrained weights (buffalo_l = SCRFD detector + ArcFace recognition) are
+# downloaded automatically on first use into ~/.insightface/models/.
+# ---------------------------------------------------------------------------
+
+# --- web framework ----------------------------------------------------------
+fastapi==0.142.2
+uvicorn[standard]==0.54.0
+python-multipart==0.0.32          # multipart/form-data uploads (image upload)
+pydantic==2.13.5
+pydantic-settings==2.15.0         # reads configuration from .env
+
+# --- face recognition (pretrained models, INFERENCE ONLY) -------------------
+insightface==2.0
+onnxruntime==1.30.0               # CPU runtime (see README to swap in onnxruntime-gpu)
+opencv-python==5.0.0.93
+numpy==2.5.3
+
+# --- database ---------------------------------------------------------------
+# MongoDB is the storage backend. Its drivers are the only database packages
+# the project needs; embeddings are stored and searched natively in MongoDB
+# ($vectorSearch when the deployment supports it).
+pymongo==4.10.1
